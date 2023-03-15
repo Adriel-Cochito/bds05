@@ -42,7 +42,7 @@ public class User implements UserDetails, Serializable {
 	private Set<Role> roles = new HashSet<>();
 	
 	@OneToMany(mappedBy = "review")
-	private List<Review> review = new ArrayList<>();
+	private List<Review> reviews = new ArrayList<>();
 	
 	public User() {
 	}
@@ -103,12 +103,12 @@ public class User implements UserDetails, Serializable {
 	}
 
 
-	public List<Review> getReview() {
-		return review;
+	public List<Review> getReviews() {
+		return reviews;
 	}
 
-	public void setReview(List<Review> review) {
-		this.review = review;
+	public void setReviews(List<Review> review) {
+		this.reviews = review;
 	}
 
 	@Override

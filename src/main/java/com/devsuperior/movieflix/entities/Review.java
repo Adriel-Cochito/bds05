@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 
 public class Review implements Serializable {
@@ -23,18 +24,20 @@ public class Review implements Serializable {
 	@JoinColumn(name = "offer_id")
 	private Movie movie;
 	
+	@OneToOne
+	@JoinColumn(name = "user")
+	private User user;
+	
 	public Review() {
 	}
 	
-	
-	public Review(Long id, String text, Movie movie) {
+	public Review(Long id, String text, Movie movie, User user) {
+		super();
 		this.id = id;
 		this.text = text;
 		this.movie = movie;
+		this.user = user;
 	}
-
-
-
 
 	public Long getId() {
 		return id;
@@ -50,7 +53,14 @@ public class Review implements Serializable {
 	}
 	
 
+	public User getUser() {
+		return user;
+	}
 
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 
 	public Movie getMovie() {

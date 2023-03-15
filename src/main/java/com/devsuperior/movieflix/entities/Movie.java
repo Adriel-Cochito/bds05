@@ -1,6 +1,8 @@
 package com.devsuperior.movieflix.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 public class Movie implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,24 +22,35 @@ public class Movie implements Serializable {
 	private String subTitle;
 	private Integer year;
 	private String imgUrl;
-	private String synopisis;
+	private String synopsis;
 	
 	@ManyToOne
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
 	
+	@OneToMany(mappedBy = "review")
+	private List<Review> reviews = new ArrayList<>();
+	
+	
 	public Movie() {
 	}
 	
 	
-	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopisis) {
+
+
+	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre,
+			List<Review> reviews) {
 		this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.year = year;
 		this.imgUrl = imgUrl;
-		this.synopisis = synopisis;
+		this.synopsis = synopsis;
+		this.genre = genre;
+		this.reviews = reviews;
 	}
+
+
 
 
 	public Long getId() {
@@ -87,14 +101,41 @@ public class Movie implements Serializable {
 	}
 
 
-	public String getSynopisis() {
-		return synopisis;
+	public String getSynopsis() {
+		return synopsis;
 	}
 
 
-	public void setSynopisis(String synopisis) {
-		this.synopisis = synopisis;
+	public void setSynopsis(String synopisis) {
+		this.synopsis = synopisis;
 	}
+
+
+	public Genre getGenre() {
+		return genre;
+	}
+
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
+	
+	
+	
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+
+
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+
 
 
 	@Override

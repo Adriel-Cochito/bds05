@@ -41,30 +41,21 @@ public class User implements UserDetails, Serializable {
 		inverseJoinColumns = @JoinColumn(name = "role_id"))	
 	private Set<Role> roles = new HashSet<>();
 	
-	@OneToMany(mappedBy = "review")
+	@OneToMany(mappedBy = "user")
 	private List<Review> reviews = new ArrayList<>();
 	
 	public User() {
 	}
 
-	public User(Long id, String name, String email, String password) {
+
+	public User(Long id, String name, String email, String password, List<Review> reviews) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.reviews = reviews;
 	}
-	
-
-//	public User(Long id, String name, String email, String password, Set<Role> roles, List<Review> review) {
-//		super();
-//		this.id = id;
-//		this.name = name;
-//		this.email = email;
-//		this.password = password;
-//		this.roles = roles;
-//		this.review = review;
-//	}
 
 	public Long getId() {
 		return id;
